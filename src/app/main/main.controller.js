@@ -1,0 +1,103 @@
+(function() {
+  'use strict';
+
+  angular
+    .module('cell')
+    .controller('MainController', MainController);
+
+  /** @ngInject */
+  function MainController($timeout, webDevTec, toastr, $q, MainService, $log) {
+    var vm = this;
+
+    // list of `state` value/display objects
+    loadAll();
+    vm.selectedItem  = null;
+    vm.searchText    = null;
+    vm.latitude    = null;
+    vm.longitude    = null;
+    vm.querySearch   = querySearch;
+
+    // ******************************
+    // Internal methods
+    // ******************************
+
+    /**
+     * Search for kecamatan... use $timeout to simulate
+     * remote dataservice call.
+     */
+    function querySearch (query) {
+      change();
+      var results = query ? vm.kecamatan.filter( createFilterFor(query) ) : vm.kecamatan;
+      var deferred = $q.defer();
+      $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+      return deferred.promise;
+    }
+
+    /**
+     * Build `kecamatan` list of key/value pairs
+     */
+    function loadAll() {
+      MainService.GetKecamatan().then(
+        function(response){
+          vm.kecamatan = response;
+        }, function(errResponse){
+          $log(errResponse);
+        })
+    }
+
+    /**
+     * Create filter function for a query string
+     */
+    function createFilterFor(query) {
+      var uppercaseQuery = query.toUpperCase();
+
+      return function filterFn(state) {
+        return (state.namaKecamatan.indexOf(uppercaseQuery) === 0);
+      };
+
+    }
+
+    function change(){
+      if(!vm.selectedItem){
+        vm.latitude = null;
+        vm.longitude = null;
+        vm.inRange = undefined;
+      }
+    }
+
+    vm.isInRangeRadius = function(){
+      MainService.GetBTSByKecamatan(vm.selectedItem.idKecamatan).then(
+        function(response){
+          var dist = 0;
+          for(var i = 0; i<response.length; i++){
+            dist = distance(response[i].latCellBts, response[i].longCellBts, vm.latitude, vm.longitude,"K");
+            dist *= 1000;
+            if(dist < response[i].radiusCellBts) {
+              vm.inRange = true;
+              vm.dist = dist;
+              break;
+            }
+            else vm.inRange = false;
+              vm.dist = dist;
+          }
+        }, function(errResponse){
+          $log(errResponse);
+        })
+    }
+
+    function distance(lat1, lon1, lat2, lon2, unit) {
+      var radlat1 = Math.PI * lat1/180;
+      var radlat2 = Math.PI * lat2/180;
+      
+      var theta = lon1-lon2;
+      var radtheta = Math.PI * theta/180;
+      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+      dist = Math.acos(dist);
+      dist = dist * 180/Math.PI;
+      dist = dist * 60 * 1.1515;
+      if (unit=="K") { dist = dist * 1.609344 }
+      if (unit=="N") { dist = dist * 0.8684 }
+      return dist;
+    }
+  }
+})();
