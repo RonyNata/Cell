@@ -1,65 +1,80 @@
 <div layout-gt-sm="row" layout-align="center center">
-<div flex-xs flex-gt-xs="50">
+<div flex-xs flex-gt-xs="70">
   <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
     <md-card-title>
-      <md-card-title-text>
-        <span class="md-headline">Cek Lokasi</span>
-        <span class="md-subhead"></span>
+      <md-card-title-text layout-align="center center">
+        <span class="md-headline"><b>CEK KOORDINAT REKOMENDASI</b></span>
+        <span class="md-headline"><b>MENARA TELEKOMUNIKASI</b></span>
       </md-card-title-text>
     </md-card-title>
       <md-card-content>
-        <md-content class="md-padding">
-          <form ng-submit="$event.preventDefault()" name="searchForm">
-            <p></p>
-            <div layout-gt-sm="row" layout-align="center center">
-              <md-autocomplete flex="66" required
-                  md-input-name="autocompleteField"
-                  md-input-minlength="2"
-                  md-input-maxlength="18"
-                  md-no-cache="main.noCache"
-                  md-selected-item="main.selectedItem"
-                  md-search-text="main.searchText"
-                  md-items="item in main.querySearch(main.searchText)"
-                  md-item-text="item.namaKecamatan"
-                  md-require-match
-                  md-floating-label="Pilih Kecamatan">
-                <md-item-template>
-                  <span md-highlight-text="main.searchText">{{item.namaKecamatan}}</span>
-                </md-item-template>
-                <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
-                  <div ng-message="required">Anda <b>harus</b> memilih kecamatan terlebih dahulu.</div>
-                  <div ng-message="md-require-match">Pilih Kecamatan yang tersedia.</div>
-                  <div ng-message="minlength">Terlalu panjang.</div>
-                  <div ng-message="maxlength">Terlalu pendek.</div>
-                </div>
-              </md-autocomplete>
-            </div>
-            <div layout-gt-sm="row" ng-if="main.selectedItem" layout-align="center center">
-              <md-input-container flex="13">
-                <label>Latitude</label>
-                <input type="number" ng-model="main.latitude"/>
-              </md-input-container>
-              <md-input-container flex="13">
-                <label>Longitude</label>
-                <input type="number" ng-model="main.longitude"/>
-              </md-input-container>
-            </div>
-            <!-- <div ng-if="main.inRange != undefined && main.selectedItem" layout-gt-sm="row" layout-align="center center">
-              {{main.inRange ? 'In Cell' : 'Out Cell'}}
-            </div> -->
-            <!-- <div layout="row" layout-align="center center" flex="33" ng-if="main.selectedItem">
-              <md-button class="md-raised md-primary" ng-click="main.isInRangeRadius()">Cek</md-button>
-            </div> -->
-          </form>
+        <md-content class="md-padding" layout-gt-sm="row" style="background: #f0f0f0">
+          <div flex="50">
+            <div id='map' style='width: 400px; height: 250px;'></div>
+            <pre id='coordinates' class='coordinates'></pre>
+          </div>
+          <div flex="50">
+            <form ng-submit="$event.preventDefault()" name="searchForm">
+              <p></p>
+              <div layout-gt-sm="row" layout-align="center center">
+                <md-autocomplete flex="66" required
+                    md-input-name="autocompleteField"
+                    md-input-minlength="2"
+                    md-input-maxlength="18"
+                    md-no-cache="main.noCache"
+                    md-selected-item="main.selectedItem"
+                    md-search-text="main.searchText"
+                    md-items="item in main.querySearch(main.searchText)"
+                    md-item-text="item.namaKecamatan"
+                    md-require-match
+                    md-floating-label="Pilih Kecamatan">
+                  <md-item-template>
+                    <span md-highlight-text="main.searchText">{{item.namaKecamatan}}</span>
+                  </md-item-template>
+                  <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+                    <div ng-message="required">Anda <b>harus</b> memilih kecamatan terlebih dahulu.</div>
+                    <div ng-message="md-require-match">Pilih Kecamatan yang tersedia.</div>
+                    <div ng-message="minlength">Terlalu panjang.</div>
+                    <div ng-message="maxlength">Terlalu pendek.</div>
+                  </div>
+                </md-autocomplete>
+              </div>
+              <div layout-gt-sm="row" layout-align="center center">
+                <md-input-container flex="13">
+                  <label>Latitude</label>
+                  <input type="number" ng-model="main.latitude" ng-change="main.change()"/>
+                </md-input-container>
+                <md-input-container flex="13">
+                  <label>Longitude</label>
+                  <input type="number" ng-model="main.longitude" ng-change="main.change()"/>
+                </md-input-container>
+              </div>
+              <!-- <div ng-if="main.inRange != undefined && main.selectedItem" layout-gt-sm="row" layout-align="center center">
+                {{main.inRange ? 'In Cell' : 'Out Cell'}}
+              </div> -->
+              <!-- <div layout="row" layout-align="center center" flex="33" ng-if="main.selectedItem">
+                <md-button class="md-raised md-primary" ng-click="main.isInRangeRadius()">Cek</md-button>
+              </div> -->
+              <div layout-gt-sm="row">
+                <md-button class="md-raised md-warn" ng-click="main.reset()" style="width: 50%">Reset</md-button>
+                <md-button class="md-raised md-primary" ng-click="main.isInRangeRadius()" style="width: 50%">Cek Koordinat</md-button>
+              </div>
+            </form>
+          </div>
         </md-content>
+        <div layout-gt-sm="row" layout-align="center center" ng-if="main.inRange != undefined">
+            <p class="md-flex">Status Koordinat</p>
+        </div>
         <md-toolbar md-colors="{background: '{{main.inRange ? 'light-green' : 'red'}}'}" ng-if="main.inRange != undefined">
           <div class="md-toolbar-tools" layout-align="center center">
-            <h2 class="md-flex">Out Cell</h2>
+            <h2 class="md-flex">{{main.inRange ? 'In Cell' : 'Out Cell'}}</h2> 
           </div>
         </md-toolbar>
+        <div layout-gt-sm="row" layout-align="center center" ng-if="main.inRange != undefined && !main.inRange">
+            <a href="#" class="md-flex" style="padding-top: 5px">(Download Dokumen Permohonan)</a>
+        </div>
       </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
-      <md-button class="md-raised md-primary" ng-click="main.isInRangeRadius()">Cek</md-button>
     </md-card-actions>
   </md-card>
 </div>

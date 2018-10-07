@@ -70,6 +70,7 @@
         function(response){
           var dist = 0;
           for(var i = 0; i<response.length; i++){
+            // myMap();
             dist = distance(response[i].latCellBts, response[i].longCellBts, vm.latitude, vm.longitude,"K");
             dist *= 1000;
             if(dist < response[i].radiusCellBts) {
@@ -98,6 +99,48 @@
       if (unit=="K") { dist = dist * 1.609344 }
       if (unit=="N") { dist = dist * 0.8684 }
       return dist;
+    }
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoibmF0YWJha2EiLCJhIjoiY2pteWppbm14MWVhZTN3cnVqZWRvcGdhZiJ9.ZEPMCBHqlRUPtHnKWYoWJQ';
+    var coordinates = document.getElementById('coordinates');
+    changeCoordinates(-6.3660823, 107.1730974);
+
+    vm.change = function(){
+      if(vm.latitude != undefined && vm.longitude != undefined)
+        changeCoordinates(vm.latitude, vm.longitude);
+    }
+
+    vm.reset = function(){
+      vm.latitude = null;
+      vm.longitude = null;
+      vm.inRange = null;
+      vm.selectedItem = null;
+      changeCoordinates(-6.3660823, 107.1730974);
+    }
+
+    function changeCoordinates(lat,long){
+      var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v9',
+          center: [long, lat],
+          zoom: 15
+      });
+
+      var marker = new mapboxgl.Marker({
+          draggable: true
+      })
+          .setLngLat([long, lat])
+          .addTo(map);
+
+      function onDragEnd() {
+          var lngLat = marker.getLngLat();
+          coordinates.style.display = 'block';
+          coordinates.innerHTML = 'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+          vm.latitude = lngLat.lat;
+          vm.longitude = lngLat.lng;
+      }
+
+      marker.on('dragend', onDragEnd);
     }
   }
 })();
