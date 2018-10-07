@@ -1,3 +1,4 @@
+<div layout-gt-sm="row" layout-align="center center">
 <div flex-xs flex-gt-xs="50">
   <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
     <md-card-title>
@@ -43,18 +44,23 @@
                 <input type="number" ng-model="main.longitude"/>
               </md-input-container>
             </div>
-            <div ng-if="main.inRange != undefined && main.selectedItem" layout-gt-sm="row" layout-align="center center">
+            <!-- <div ng-if="main.inRange != undefined && main.selectedItem" layout-gt-sm="row" layout-align="center center">
               {{main.inRange ? 'In Cell' : 'Out Cell'}}
-            </div>
+            </div> -->
             <!-- <div layout="row" layout-align="center center" flex="33" ng-if="main.selectedItem">
               <md-button class="md-raised md-primary" ng-click="main.isInRangeRadius()">Cek</md-button>
             </div> -->
           </form>
         </md-content>
-        
+        <md-toolbar md-colors="{background: '{{main.inRange ? 'light-green' : 'red'}}'}" ng-if="main.inRange != undefined">
+          <div class="md-toolbar-tools" layout-align="center center">
+            <h2 class="md-flex">Out Cell</h2>
+          </div>
+        </md-toolbar>
       </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
       <md-button class="md-raised md-primary" ng-click="main.isInRangeRadius()">Cek</md-button>
     </md-card-actions>
   </md-card>
+</div>
 </div>
