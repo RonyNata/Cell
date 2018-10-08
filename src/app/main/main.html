@@ -70,8 +70,8 @@
             <h2 class="md-flex">{{main.inRange ? 'In Cell' : 'Out Cell'}}</h2> 
           </div>
         </md-toolbar>
-        <div layout-gt-sm="row" layout-align="center center" ng-if="main.inRange != undefined && !main.inRange">
-            <a href="#" class="md-flex" style="padding-top: 5px">(Download Dokumen Permohonan)</a>
+        <div layout-gt-sm="row" layout-align="center center" ng-if="main.inRange != undefined && main.inRange">
+            <a href="#" class="md-flex" style="padding-top: 5px" ng-click="main.getDocument()">(Download Dokumen Permohonan)</a>
         </div>
       </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
