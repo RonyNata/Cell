@@ -20,7 +20,8 @@
               md-items="item in input.querySearch(input.searchText)"
               md-item-text="item.namaKecamatan"
               md-require-match
-              md-floating-label="Pilih Kecamatan">
+              md-floating-label="Pilih Kecamatan"
+              style="margin-left : 255px;">
             <md-item-template>
               <span md-highlight-text="input.searchText">{{item.namaKecamatan}}</span>
             </md-item-template>
@@ -31,6 +32,7 @@
               <div ng-message="maxlength">Terlalu pendek.</div>
             </div>
           </md-autocomplete>
+          <md-button class="md-raised md-basic" ng-click="input.getSuggestNextCode()" style="margin-bottom:30px;">Genarate kode selanjutnya</md-button>
         </div>
         <div layout-gt-sm="row" layout-align="center center">
           <md-input-container flex="13">
@@ -52,12 +54,12 @@
             <input type="number" ng-model="input.item.latCellBts"/>
           </md-input-container>
         </div>
-        <div ng-if="input.jumlah" layout-align="center center">
-          Jumlah data Cell BTS <b>{{input.jumlah}}</b>
+        <div ng-if="input.jumlah" layout-align="center center" style="text-align : center">
+          Jumlah data Cell BTS <b>{{input.jumlah}}</b>, saran kode selanjutnya : <b>{{input.suggestNextBtsCode}}</b>
         </div>
         <div layout="row" layout-align="center center" style="margin : 10px 0px 10px 0px;">
-          <md-button class="md-raised md-primary" ng-click="input.getBTS()" ng-if="!input.jumlah">Tampilkan Jumlah</md-button>
-          <md-button class="md-raised md-primary" ng-click="input.save()">Simpan</md-button>
+          <!-- <md-button class="md-raised md-primary" ng-click="input.getBTS()" ng-if="!input.jumlah">Tampilkan Jumlah</md-button> -->
+          <md-button class="md-raised md-primary" ng-click="input.save()" style="margin-left:300px; padding:0px 40px 0px 40px;">Simpan</md-button>
         </div>
       </form>
     </md-content>

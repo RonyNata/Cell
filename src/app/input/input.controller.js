@@ -15,6 +15,7 @@
     vm.searchText    = null;
     vm.item = {};
     vm.querySearch   = querySearch;
+    vm.item.kodeCellBts = '';
 
     // ******************************
     // Internal methods
@@ -75,10 +76,49 @@
       }
     }
 
+    function convertBTSCodeIntoInt(btsCode) {
+        var tempStr = btsCode.slice(4,8);
+        return parseInt(tempStr);
+    }
+
+    vm.getSuggestNextCode = function() {
+        MainService.GetBTSByKecamatan(vm.selectedItem.idKecamatan).then(
+          function(response){
+            if (response.length > 0) {
+                var i;
+                var latestBTSCode = convertBTSCodeIntoInt(response[0].kodeCellBts);
+                for (i=1;i<response.length;i++) {
+                    if (convertBTSCodeIntoInt(response[i].kodeCellBts) > latestBTSCode) {
+                        latestBTSCode = convertBTSCodeIntoInt(response[i].kodeCellBts);
+                    }
+                }
+                vm.item.kodeCellBts =
+                response[0].kodeCellBts.slice(0,4) + "000".slice(0,3-parseInt(latestBTSCode.toString().length)) + (latestBTSCode+1).toString();
+
+            } else {
+                vm.item.kodeCellBts = vm.selectedItem.idKecamatan+"-001";
+            }
+          }, function(errResponse){
+            $log(errResponse);
+          })
+    }
+
     vm.getBTS = function(){
       MainService.GetBTSByKecamatan(vm.selectedItem.idKecamatan).then(
         function(response){
           vm.jumlah = response.length;
+          if (response.length > 0) {
+              var i;
+              var latestBTSCode = convertBTSCodeIntoInt(response[0].kodeCellBts);
+              for (i=1;i<response.length;i++) {
+                  if (convertBTSCodeIntoInt(response[i].kodeCellBts) > latestBTSCode) {
+                      latestBTSCode = convertBTSCodeIntoInt(response[i].kodeCellBts);
+                  }
+              }
+              vm.suggestNextBtsCode =
+              response[0].kodeCellBts.slice(0,4) + "000".slice(0,3-parseInt(latestBTSCode.toString().length)) + (latestBTSCode+1).toString();
+
+          }
         }, function(errResponse){
           $log(errResponse);
         })
