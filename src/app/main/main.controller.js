@@ -17,6 +17,9 @@
     vm.longitude     = null;
     vm.querySearch   = querySearch;
     vm.path          = API + 'get-dokumen-permohonan';
+    mapboxgl.accessToken = 'pk.eyJ1IjoibmF0YWJha2EiLCJhIjoiY2pteWppbm14MWVhZTN3cnVqZWRvcGdhZiJ9.ZEPMCBHqlRUPtHnKWYoWJQ';
+    var coordinates = document.getElementById('coordinates');
+    changeCoordinates(-6.3660823, 107.1730974);
 
     // ******************************
     // Internal methods
@@ -102,9 +105,6 @@
       return dist;
     }
 
-    mapboxgl.accessToken = 'pk.eyJ1IjoibmF0YWJha2EiLCJhIjoiY2pteWppbm14MWVhZTN3cnVqZWRvcGdhZiJ9.ZEPMCBHqlRUPtHnKWYoWJQ';
-    var coordinates = document.getElementById('coordinates');
-    changeCoordinates(-6.3660823, 107.1730974);
 
     vm.change = function(){
       if(vm.latitude != undefined && vm.longitude != undefined)

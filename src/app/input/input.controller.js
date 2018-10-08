@@ -11,11 +11,13 @@
 
     // list of `state` value/display objects
     loadAll();
+    isLogin();
     vm.selectedItem  = null;
     vm.searchText    = null;
     vm.item = {};
     vm.querySearch   = querySearch;
     vm.item.kodeCellBts = '';
+    vm.loginData = {};
 
     // ******************************
     // Internal methods
@@ -101,6 +103,22 @@
           }, function(errResponse){
             $log(errResponse);
           })
+    }
+
+    vm.login = function(){
+      InputService.Login(vm.loginData).then(
+        function(response){
+          sessionStorage.setItem('cred', response.message);
+          isLogin();
+        }, function(errResponse){
+          InputService.showToastrFailed(errResponse.data.message);
+        })
+    }
+
+    function isLogin(){
+      var cred = sessionStorage.getItem('cred');
+      if(cred == 'dummy token') vm.isLogin = true;
+      else vm.isLogin = false;
     }
 
     vm.getBTS = function(){

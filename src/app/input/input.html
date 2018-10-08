@@ -1,5 +1,43 @@
 <div layout-gt-sm="row" layout-align="center center">
-<div flex-xs flex-gt-xs="70">
+  <div flex-xs flex-gt-xs="70" ng-if="!input.isLogin">
+  <md-content class="md-padding">
+    <div layout-gt-sm="row" layout-align="center center">
+      <div flex-xs flex-gt-xs="70">
+        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+          <md-card-title>
+            <md-card-title-text layout-align="center center">
+              <span class="md-headline"><b>LOGIN ADMIN APLIKASI</b></span>
+              <span class="md-headline"><b>MENARA TELEKOMUNIKASI</b></span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-content>
+            <md-content class="md-padding" layout-gt-sm="row" style="background: #f0f0f0;margin-bottom: -15px;">
+              <div flex="100" layout-align="center center" style="margin-bottom: -10px;margin-top: 10px;">
+                <form ng-submit="$event.preventDefault()" name="searchForm">
+                  <div layout-gt-sm="row">
+                    <md-input-container flex="40">
+                      <label>USERNAME</label>
+                      <input type="text" ng-model="input.loginData.user"/>
+                    </md-input-container>
+                    <md-input-container flex="40">
+                      <label>PASSWORD</label>
+                      <input type="password" ng-model="input.loginData.password"/>
+                    </md-input-container>
+                    <md-input-container flex="20">
+                      <md-button class="md-raised md-primary" ng-click="input.login()" style="margin-top: -3px;width: 100%">Masuk</md-button>
+                    </md-input-container>                          
+                  </div>
+                </form>
+              </div>
+            </md-content>
+          </md-card-content>
+          <md-card-actions layout="row" layout-align="end center"></md-card-actions>
+        </md-card>
+      </div>
+    </div>
+  </md-content>
+</div>
+<div flex-xs flex-gt-xs="70" ng-if="input.isLogin">
 <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch style="margin-top : 20px;">
     <md-card-title>
       <md-card-title-text layout-align="center center">

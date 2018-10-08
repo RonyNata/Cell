@@ -1,7 +1,7 @@
 <div ng-cloak>
   <md-content>
-    <md-tabs md-dynamic-height md-border-bottom>
-      <md-tab label="Check Menara">
+    <!-- <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Check Menara"> -->
         <md-content class="md-padding">
           <div layout-gt-sm="row" layout-align="center center">
             <div flex-xs flex-gt-xs="70">
@@ -21,8 +21,8 @@
                     <div flex="50">
                       <form ng-submit="$event.preventDefault()" name="searchForm">
                         <p></p>
-                        <div layout-gt-sm="row">
-                          <md-autocomplete flex="13" required
+                        <div layout-gt-sm="row" layout-align="center center">
+                          <md-autocomplete flex="90" required
                               md-input-name="autocompleteField"
                               md-input-minlength="2"
                               md-input-maxlength="18"
@@ -69,8 +69,8 @@
                       <h2 class="md-flex">{{main.inRange ? 'In Cell' : 'Out Cell'}}</h2> 
                     </div>
                   </md-toolbar>
-                  <div layout-gt-sm="row" layout-align="center center" ng-if="main.inRange != undefined && !main.inRange">
-                      <a href="#" class="md-flex" style="padding-top: 5px">(Download Dokumen Permohonan)</a>
+                  <div layout-gt-sm="row" layout-align="center center" ng-if="main.inRange != undefined && main.inRange">
+                    <a href="#" class="md-flex" style="padding-top: 5px" ng-click="main.getDocument()">(Download Dokumen Permohonan)</a>
                   </div>
                 </md-card-content>
                 <md-card-actions layout="row" layout-align="end center"></md-card-actions>
@@ -78,9 +78,9 @@
             </div>
           </div>
         </md-content>
-      </md-tab>
-      <md-tab label="Login Admin">
-        <md-content class="md-padding">
+      <!-- </md-tab>
+      <md-tab label="Login Admin"> -->
+        <!-- <md-content class="md-padding">
           <div layout-gt-sm="row" layout-align="center center">
             <div flex-xs flex-gt-xs="70">
               <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
@@ -115,10 +115,10 @@
               </md-card>
             </div>
           </div>
-        </md-content>
-      </md-tab>
+        </md-content> -->
+ <!--      </md-tab>
     </md-tabs>
   </md-content>
 </div>
 <div id="map" style="width: 400px;height: 250px;" hidden></div>
-<pre id="coordinates" class="coordinates" hidden></pre>
+<pre id="coordinates" class="coordinates" hidden></pre> -->
