@@ -105,3 +105,7 @@ section.jumbotron h1 {
     border-radius: 3px;
     display: none;
 }
+
+HTMLJSCSS
+.carddemoBasicUsage .card-media {
+  background-color: #999999; }
