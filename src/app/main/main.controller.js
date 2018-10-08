@@ -6,16 +6,17 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, webDevTec, toastr, $q, MainService, $log) {
+  function MainController($timeout, webDevTec, toastr, $q, MainService, $log, API, $window) {
     var vm = this;
 
     // list of `state` value/display objects
     loadAll();
     vm.selectedItem  = null;
     vm.searchText    = null;
-    vm.latitude    = null;
-    vm.longitude    = null;
+    vm.latitude      = null;
+    vm.longitude     = null;
     vm.querySearch   = querySearch;
+    vm.path          = API + 'get-dokumen-permohonan';
 
     // ******************************
     // Internal methods
@@ -141,6 +142,10 @@
       }
 
       marker.on('dragend', onDragEnd);
+    }
+
+    vm.getDocument = function(){
+      $window.location.href = vm.path;
     }
   }
 })();
