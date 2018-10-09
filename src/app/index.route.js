@@ -15,7 +15,7 @@
         controllerAs: 'main'
       })
       .state('input', {
-        url: '/input',
+        url: '/admin',
         templateUrl: 'app/input/input.html',
         controller: 'InputController',
         controllerAs: 'input'
