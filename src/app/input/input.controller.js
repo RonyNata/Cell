@@ -140,6 +140,7 @@
         sessionStorage.removeItem('cred');
         isLogin();
         vm.loginData = {};
+        vm.item = {};
     }
 
     function isLogin(){
