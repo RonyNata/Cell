@@ -141,5 +141,15 @@
           $log(errResponse);
         })
     }
+
+    vm.getAllBTS = function(){
+      MainService.getAllBTS().then(
+        function(response){
+          vm.dataBTS = response;
+          
+        }, function(errResponse){
+          $log(errResponse);
+        })
+    }
   }
 })();

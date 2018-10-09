@@ -10,20 +10,25 @@
               <span class="md-headline"><b>MENARA TELEKOMUNIKASI</b></span>
             </md-card-title-text>
           </md-card-title>
+          
           <md-card-content>
             <md-content class="md-padding" layout-gt-sm="row" style="background: #f0f0f0;margin-bottom: -15px;">
               <div flex="100" layout-align="center center" style="margin-bottom: -10px;margin-top: 10px;">
                 <form ng-submit="$event.preventDefault()" name="searchForm">
-                  <div layout-gt-sm="row">
-                    <md-input-container flex="40">
+                  <div layout-gt-sm="row" layout-align="center center">
+                    <md-input-container flex="60">
                       <label>USERNAME</label>
                       <input type="text" ng-model="input.loginData.user"/>
                     </md-input-container>
-                    <md-input-container flex="40">
+                  </div>
+                  <div layout-gt-sm="row" layout-align="center center">
+                    <md-input-container flex="60">
                       <label>PASSWORD</label>
                       <input type="password" ng-model="input.loginData.password"/>
                     </md-input-container>
-                    <md-input-container flex="20">
+                  </div>
+                  <div layout-gt-sm="row" layout-align="center center">
+                    <md-input-container flex="60">
                       <md-button class="md-raised md-primary" ng-click="input.login()" style="margin-top: -3px;width: 100%">Masuk</md-button>
                     </md-input-container>                          
                   </div>
@@ -102,5 +107,30 @@
       </form>
     </md-content>
 </md-card>
+
+<h1>DAFTAR CELL BTS</h1>
+
+<table>
+  <tr>
+    <th>NO</th>
+    <th width=30%>KECAMATAN</th>
+    <th width=10%>KODE CELL BTS PER KECAMATAN</th>
+    <th>RADIUS</th>
+    <th>LONGITUDE</th>
+    <th>LATTITUDE</th>
+    <th>ACTION</th>
+  </tr>
+
+  <tr>
+    <td>1</td>
+    <td style="text-align: left" >BABELAN</td>
+    <td>BBL-001</td>
+    <td>400</td>
+    <td>107.021185</td>
+    <td>-6.1934780</td>
+    <td>X</td>
+  </tr>
+</table>
+
 </div>
 </div>

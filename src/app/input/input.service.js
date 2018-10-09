@@ -32,6 +32,19 @@
             return deferred.promise;
         };
 
+        service.GetAllBTS = function () {
+            var deferred = $q.defer();
+            $http.get(API + 'cell-bts/').then(
+                function (response){
+                    deferred.resolve(response.data);
+                },
+                function(errResponse){
+                    deferred.reject(errResponse);
+                }
+            );
+            return deferred.promise;
+        };
+
         service.Login = function (data) {
             var deferred = $q.defer();
             $http.post(API + 'login/', data).then(

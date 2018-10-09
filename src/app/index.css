@@ -109,3 +109,21 @@ section.jumbotron h1 {
 HTMLJSCSS
 .carddemoBasicUsage .card-media {
   background-color: #999999; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: center;
+  padding: 8px;
+  height: 50px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
