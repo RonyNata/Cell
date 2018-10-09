@@ -43,7 +43,7 @@
         function(response){
           vm.kecamatan = response;
         }, function(errResponse){
-          $log(errResponse);
+          console.log(errResponse);
         })
     }
 
@@ -63,6 +63,9 @@
       vm.item.idKecamatan = vm.selectedItem.idKecamatan;
       InputService.CreateDataBTS(vm.item).then(
         function(){
+            vm.item.latCellBts = null;
+            vm.item.longCellBts = null;
+            vm.item.radiusCellBts = null;
           toastr.success('Data Berhasil Disimpan');
           vm.getSuggestNextCode();
         }, function(errResponse){
@@ -107,6 +110,22 @@
           })
     }
 
+    vm.deleteCellBTS = function(selectedCellBts) {
+        InputService.deleteCellBTS(selectedCellBts).then(
+            function(response) {
+                vm.item.latCellBts = null;
+                vm.item.longCellBts = null;
+                vm.item.radiusCellBts = null;
+                vm.getSuggestNextCode();
+                toastr.success('Data berhasil dihapus');
+            },
+            function(errResponse) {
+                toastr.success('Data gagal dihapus');
+                console.log(errResponse);
+            }
+        );
+    }
+
     vm.login = function(){
       InputService.Login(vm.loginData).then(
         function(response){
@@ -115,6 +134,12 @@
         }, function(errResponse){
           InputService.showToastrFailed(errResponse.data.message);
         })
+    }
+
+    vm.logout = function() {
+        sessionStorage.removeItem('cred');
+        isLogin();
+        vm.loginData = {};
     }
 
     function isLogin(){
@@ -148,7 +173,7 @@
       MainService.getAllBTS().then(
         function(response){
           vm.dataBTS = response;
-          
+
         }, function(errResponse){
           $log(errResponse);
         })

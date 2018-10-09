@@ -62,6 +62,19 @@
             toastr.error(message);
         }
 
+		service.deleteCellBTS = function(idCellBts) {
+			var deferred = $q.defer();
+			$http.delete(API + 'delete-bts/'+idCellBts).then(
+				function (response) {
+					deferred.resolve(response.data);
+				},
+				function (errResponse) {
+					deferred.reject(errResponse);
+				}
+			);
+			return deferred.promise;
+		}
+
         return service;
 	}
 })();

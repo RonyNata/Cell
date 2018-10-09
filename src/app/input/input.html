@@ -10,7 +10,7 @@
               <span class="md-headline"><b>MENARA TELEKOMUNIKASI</b></span>
             </md-card-title-text>
           </md-card-title>
-          
+
           <md-card-content>
             <md-content class="md-padding" layout-gt-sm="row" style="background: #f0f0f0;margin-bottom: -15px;">
               <div flex="100" layout-align="center center" style="margin-bottom: -10px;margin-top: 10px;">
@@ -30,7 +30,7 @@
                   <div layout-gt-sm="row" layout-align="center center">
                     <md-input-container flex="60">
                       <md-button class="md-raised md-primary" ng-click="input.login()" style="margin-top: -3px;width: 100%">Masuk</md-button>
-                    </md-input-container>                          
+                    </md-input-container>
                   </div>
                 </form>
               </div>
@@ -43,6 +43,9 @@
   </md-content>
 </div>
 <div flex-xs flex-gt-xs="70" ng-if="input.isLogin">
+<div layout-gt-sm="row" layout-align="end">
+    <md-button class="md-warn md-raised md-hue-2" ng-click="input.logout()" style="margin: 10px 5px 0px 5px;" >Log out</md-button>
+</div>
 <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch style="margin-top : 20px;">
     <md-card-title>
       <md-card-title-text layout-align="center center">
@@ -128,7 +131,9 @@
     <td>{{bts.radiusCellBts}}</td>
     <td>{{bts.longCellBts}}</td>
     <td>{{bts.latCellBts}}</td>
-    <td>X</td>
+    <td>
+        <md-button class="md-warn md-raised md-hue-2" ng-click="input.deleteCellBTS(bts.kodeCellBts)">hapus</md-button>
+    </td>
   </tr>
 </table>
 
