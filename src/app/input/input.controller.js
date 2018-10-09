@@ -64,7 +64,7 @@
       InputService.CreateDataBTS(vm.item).then(
         function(){
           toastr.success('Data Berhasil Disimpan');
-          vm.getBTS();
+          vm.getSuggestNextCode();
         }, function(errResponse){
           $log(errResponse);
         })
@@ -86,6 +86,8 @@
     vm.getSuggestNextCode = function() {
         MainService.GetBTSByKecamatan(vm.selectedItem.idKecamatan).then(
           function(response){
+            vm.listBts = response;
+            vm.listBts = vm.listBts.sort( function ( a, b ) { return convertBTSCodeIntoInt(a.kodeCellBts) - convertBTSCodeIntoInt(b.kodeCellBts); } );
             if (response.length > 0) {
                 var i;
                 var latestBTSCode = convertBTSCodeIntoInt(response[0].kodeCellBts);

@@ -62,9 +62,9 @@
               md-search-text="input.searchText"
               md-items="item in input.querySearch(input.searchText)"
               md-item-text="item.namaKecamatan"
+              md-selected-item-change="input.getSuggestNextCode()"
               md-require-match
-              md-floating-label="Pilih Kecamatan"
-              style="margin-left : 255px;">
+              md-floating-label="Pilih Kecamatan">
             <md-item-template>
               <span md-highlight-text="input.searchText">{{item.namaKecamatan}}</span>
             </md-item-template>
@@ -75,7 +75,7 @@
               <div ng-message="maxlength">Terlalu pendek.</div>
             </div>
           </md-autocomplete>
-          <md-button class="md-raised md-basic" ng-click="input.getSuggestNextCode()" style="margin-bottom:30px;">Genarate kode selanjutnya</md-button>
+          <!-- <md-button class="md-raised md-basic" ng-click="input.getSuggestNextCode()" style="margin-bottom:30px;">Genarate kode selanjutnya</md-button> -->
         </div>
         <div layout-gt-sm="row" layout-align="center center">
           <md-input-container flex="13">
@@ -121,13 +121,13 @@
     <th>ACTION</th>
   </tr>
 
-  <tr>
-    <td>1</td>
-    <td style="text-align: left" >BABELAN</td>
-    <td>BBL-001</td>
-    <td>400</td>
-    <td>107.021185</td>
-    <td>-6.1934780</td>
+  <tr ng-repeat="bts in input.listBts">
+    <td>{{$index + 1}}</td>
+    <td style="text-align: left" >{{input.selectedItem.namaKecamatan}}</td>
+    <td>{{bts.kodeCellBts}}</td>
+    <td>{{bts.radiusCellBts}}</td>
+    <td>{{bts.longCellBts}}</td>
+    <td>{{bts.latCellBts}}</td>
     <td>X</td>
   </tr>
 </table>
