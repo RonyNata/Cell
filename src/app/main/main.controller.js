@@ -141,7 +141,7 @@
           vm.longitude = lngLat.lng;
       }
 
-      marker.on('dragend', onDragEnd);
+      marker.on('drag', onDragEnd);
     }
 
     vm.getDocument = function(){

@@ -6,6 +6,6 @@
     .module('cell')
     .constant('malarkey', malarkey)
     .constant('moment', moment)
-    .constant('API', 'http://10.2.1.32:8096/');
+    .constant('API', 'http://10.2.1.32:8989/');
 
 })();

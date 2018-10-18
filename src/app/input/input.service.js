@@ -8,7 +8,11 @@
 
 		service.CreateDataBTS = function (data) {
             var deferred = $q.defer();
-            $http.post(API + 'create-cell-bts/', data).then(
+            $http.post(API + 'create-cell-bts/', data, {
+                headers: {
+                    'Authorization': sessionStorage.getItem('cred')
+                }
+            }).then(
                 function (response){
                     deferred.resolve(response.data);
                 },
@@ -21,7 +25,11 @@
 
         service.GetBTSByKecamatan = function (idKecamatan) {
             var deferred = $q.defer();
-            $http.get(API + 'cell-bts/' + idKecamatan).then(
+            $http.get(API + 'cell-bts/' + idKecamatan, {
+                headers: {
+                    'Authorization': sessionStorage.getItem('cred')
+                }
+            }).then(
                 function (response){
                     deferred.resolve(response.data);
                 },
@@ -34,7 +42,11 @@
 
         service.GetAllBTS = function () {
             var deferred = $q.defer();
-            $http.get(API + 'cell-bts/').then(
+            $http.get(API + 'cell-bts/',{
+                headers: {
+                    'Authorization': sessionStorage.getItem('cred')
+                }
+            }).then(
                 function (response){
                     deferred.resolve(response.data);
                 },
@@ -47,7 +59,7 @@
 
         service.Login = function (data) {
             var deferred = $q.defer();
-            $http.post(API + 'login/', data).then(
+            $http.post(API + 'login-secure/', data).then(
                 function (response){
                     deferred.resolve(response.data);
                 },
@@ -64,7 +76,11 @@
 
 		service.deleteCellBTS = function(idCellBts) {
 			var deferred = $q.defer();
-			$http.delete(API + 'delete-bts/'+idCellBts).then(
+			$http.delete(API + 'delete-bts/'+idCellBts, {
+                headers: {
+                    'Authorization': sessionStorage.getItem('cred')
+                }
+            }).then(
 				function (response) {
 					deferred.resolve(response.data);
 				},

@@ -145,7 +145,7 @@
 
     function isLogin(){
       var cred = sessionStorage.getItem('cred');
-      if(cred == 'dummy token') vm.isLogin = true;
+      if(cred != undefined) vm.isLogin = true;
       else vm.isLogin = false;
     }
 
