@@ -25,11 +25,7 @@
 
         service.GetBTSByKecamatan = function (idKecamatan) {
             var deferred = $q.defer();
-            $http.get(API + 'cell-bts/' + idKecamatan, {
-                headers: {
-                    'Authorization': sessionStorage.getItem('cred')
-                }
-            }).then(
+            $http.get(API + 'cell-bts/' + idKecamatan).then(
                 function (response){
                     deferred.resolve(response.data);
                 },
@@ -42,11 +38,7 @@
 
         service.GetAllBTS = function () {
             var deferred = $q.defer();
-            $http.get(API + 'cell-bts/',{
-                headers: {
-                    'Authorization': sessionStorage.getItem('cred')
-                }
-            }).then(
+            $http.get(API + 'cell-bts/').then(
                 function (response){
                     deferred.resolve(response.data);
                 },

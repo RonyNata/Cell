@@ -87,6 +87,7 @@
     }
 
     vm.getSuggestNextCode = function() {
+        vm.listBts = [];
         MainService.GetBTSByKecamatan(vm.selectedItem.idKecamatan).then(
           function(response){
             vm.listBts = response;
@@ -120,7 +121,7 @@
                 toastr.success('Data berhasil dihapus');
             },
             function(errResponse) {
-                toastr.success('Data gagal dihapus');
+                toastr.error('Data gagal dihapus');
                 console.log(errResponse);
             }
         );
@@ -129,7 +130,7 @@
     vm.login = function(){
       InputService.Login(vm.loginData).then(
         function(response){
-          sessionStorage.setItem('cred', response.message);
+          sessionStorage.setItem('cred', response.tokenType + ' ' + response.accessToken);
           isLogin();
         }, function(errResponse){
           InputService.showToastrFailed(errResponse.data.message);

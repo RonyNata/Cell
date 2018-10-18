@@ -1,11 +1,11 @@
 <div layout-gt-sm="row" layout-align="center center">
   <div flex-xs flex-gt-xs="70" ng-if="!input.isLogin">
-  <md-content class="md-padding">
+  <md-content class="md-padding" style="background-color: #882424">
     <div layout-gt-sm="row" layout-align="center center">
       <div flex-xs flex-gt-xs="70">
-        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch style="background-color: #57555f">
           <md-card-title>
-            <md-card-title-text layout-align="center center">
+            <md-card-title-text layout-align="center center" style="color: #dedede">
               <span class="md-headline"><b>LOGIN ADMIN APLIKASI</b></span>
               <span class="md-headline"><b>MENARA TELEKOMUNIKASI</b></span>
             </md-card-title-text>
@@ -46,13 +46,13 @@
 <div layout-gt-sm="row" layout-align="end">
     <md-button class="md-warn md-raised md-hue-2" ng-click="input.logout()" style="margin: 10px 5px 0px 5px;" >Log out</md-button>
 </div>
-<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch style="margin-top : 20px;">
+<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch style="margin-top : 20px; background-color: #57555f">
     <md-card-title>
-      <md-card-title-text layout-align="center center">
+      <md-card-title-text layout-align="center center" style="color: #dedede">
         <span class="md-headline"><b>TAMBAH DATA CELL BTS</b></span>
       </md-card-title-text>
     </md-card-title>
-    <md-content class="md-padding">
+    <md-content class="md-padding" style="margin: 50px; margin-top: 15px">
       <form ng-submit="$event.preventDefault()" name="searchForm">
         <p></p>
         <div layout-gt-sm="row" layout-align="center center">
@@ -110,32 +110,33 @@
       </form>
     </md-content>
 </md-card>
+<div ng-if="input.listBts.length">
+  <h1 style="color: #dedede">DAFTAR CELL BTS</h1>
 
-<h1>DAFTAR CELL BTS</h1>
+  <table>
+    <tr>
+      <th>NO</th>
+      <th width=30%>KECAMATAN</th>
+      <th width=10%>KODE CELL BTS PER KECAMATAN</th>
+      <th>RADIUS</th>
+      <th>LONGITUDE</th>
+      <th>LATTITUDE</th>
+      <th>ACTION</th>
+    </tr>
 
-<table>
-  <tr>
-    <th>NO</th>
-    <th width=30%>KECAMATAN</th>
-    <th width=10%>KODE CELL BTS PER KECAMATAN</th>
-    <th>RADIUS</th>
-    <th>LONGITUDE</th>
-    <th>LATTITUDE</th>
-    <th>ACTION</th>
-  </tr>
+    <tr ng-repeat="bts in input.listBts">
+      <td>{{$index + 1}}</td>
+      <td style="text-align: left" >{{input.selectedItem.namaKecamatan}}</td>
+      <td>{{bts.kodeCellBts}}</td>
+      <td>{{bts.radiusCellBts}}</td>
+      <td>{{bts.longCellBts}}</td>
+      <td>{{bts.latCellBts}}</td>
+      <td>
+          <md-button class="md-warn md-raised md-hue-2" ng-click="input.deleteCellBTS(bts.kodeCellBts)">hapus</md-button>
+      </td>
+    </tr>
+  </table>
 
-  <tr ng-repeat="bts in input.listBts">
-    <td>{{$index + 1}}</td>
-    <td style="text-align: left" >{{input.selectedItem.namaKecamatan}}</td>
-    <td>{{bts.kodeCellBts}}</td>
-    <td>{{bts.radiusCellBts}}</td>
-    <td>{{bts.longCellBts}}</td>
-    <td>{{bts.latCellBts}}</td>
-    <td>
-        <md-button class="md-warn md-raised md-hue-2" ng-click="input.deleteCellBTS(bts.kodeCellBts)">hapus</md-button>
-    </td>
-  </tr>
-</table>
-
-</div>
+  </div>
+ </div>
 </div>
