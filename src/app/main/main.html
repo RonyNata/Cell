@@ -1,13 +1,13 @@
-<div ng-cloak>
-  <md-content>
+<div ng-cloak style="background-color: #882424;">
+  <md-content ng-cloak style="background-color: #882424;">
     <!-- <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Check Menara"> -->
-        <md-content class="md-padding">
+        <md-content class="md-padding" ng-cloak style="background-color: #882424;">
           <div layout-gt-sm="row" layout-align="center center">
             <div flex-xs flex-gt-xs="70">
-              <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+              <md-card style="background-color: #57555f;margin-top: 35px;margin-bottom: -10px;" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
                 <md-card-title>
-                  <md-card-title-text layout-align="center center">
+                  <md-card-title-text layout-align="center center" style="color: #dedede">
                     <span class="md-headline"><b>CEK KOORDINAT REKOMENDASI</b></span>
                     <span class="md-headline"><b>MENARA TELEKOMUNIKASI</b></span>
                   </md-card-title-text>
@@ -61,16 +61,16 @@
                       </form>
                     </div>
                   </md-content>
-                  <div layout-gt-sm="row" layout-align="center center" ng-if="main.inRange != undefined">
+                  <div layout-gt-sm="row" layout-align="center center" ng-if="main.inRange != undefined" style="margin-top: 12px;color: white;">
                       <p class="md-flex">Status Koordinat</p>
                   </div>
                   <md-toolbar md-colors="{background: '{{main.inRange ? 'light-green' : 'red'}}'}" ng-if="main.inRange != undefined">
                     <div class="md-toolbar-tools" layout-align="center center">
-                      <h2 class="md-flex">{{main.inRange ? 'In Cell' : 'Out Cell'}}</h2> 
+                      <h2 class="md-flex" style="font-weight: bold;color: white;">{{main.inRange ? 'IN CELL' : 'OUT CELL'}}</h2> 
                     </div>
                   </md-toolbar>
                   <div layout-gt-sm="row" layout-align="center center" ng-if="main.inRange != undefined && main.inRange">
-                    <a href="#" class="md-flex" style="padding-top: 5px" ng-click="main.getDocument()">(Download Dokumen Permohonan)</a>
+                    <a href="#" class="md-flex" style="padding-top: 5px;color: lightblue" ng-click="main.getDocument()">(Klik Disini Untuk Download Dokumen Permohonan)</a>
                   </div>
                 </md-card-content>
                 <md-card-actions layout="row" layout-align="end center"></md-card-actions>
