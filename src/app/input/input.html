@@ -3,7 +3,7 @@
   <md-content class="md-padding" style="background-color: #882424">
     <div layout-gt-sm="row" layout-align="center center">
       <div flex-xs flex-gt-xs="70">
-        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch style="background-color: #57555f">
+        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch style="background-color: #57555f; margin-top: 67px">
           <md-card-title>
             <md-card-title-text layout-align="center center" style="color: #dedede">
               <span class="md-headline"><b>LOGIN ADMIN APLIKASI</b></span>
@@ -12,8 +12,8 @@
           </md-card-title>
 
           <md-card-content>
-            <md-content class="md-padding" layout-gt-sm="row" style="background: #f0f0f0;margin-bottom: -15px;">
-              <div flex="100" layout-align="center center" style="margin-bottom: -10px;margin-top: 10px;">
+            <md-content class="md-padding" layout-gt-sm="row" style="background: #f0f0f0; margin: 20px">
+              <div flex="100" layout-align="center center">
                 <form ng-submit="$event.preventDefault()" name="searchForm">
                   <div layout-gt-sm="row" layout-align="center center">
                     <md-input-container flex="60">
@@ -113,7 +113,7 @@
 <div ng-if="input.listBts.length">
   <h1 style="color: #dedede">DAFTAR CELL BTS</h1>
 
-  <table>
+  <table id="t01">
     <tr>
       <th>NO</th>
       <th width=30%>KECAMATAN</th>
@@ -132,7 +132,7 @@
       <td>{{bts.longCellBts}}</td>
       <td>{{bts.latCellBts}}</td>
       <td>
-          <md-button class="md-warn md-raised md-hue-2" ng-click="input.deleteCellBTS(bts.kodeCellBts)">hapus</md-button>
+        <md-button class="md-warn md-raised md-hue-2" ng-click="input.deleteCellBTS(bts.kodeCellBts)">hapus</md-button>
       </td>
     </tr>
   </table>
