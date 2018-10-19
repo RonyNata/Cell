@@ -19,7 +19,7 @@
     vm.path          = API + 'get-dokumen-permohonan';
     mapboxgl.accessToken = 'pk.eyJ1IjoibmF0YWJha2EiLCJhIjoiY2pteWppbm14MWVhZTN3cnVqZWRvcGdhZiJ9.ZEPMCBHqlRUPtHnKWYoWJQ';
     var coordinates = document.getElementById('coordinates');
-    changeCoordinates(-6.3660823, 107.1730974);
+    changeCoordinates(-6.2884815, 107.119828, true);
 
     // ******************************
     // Internal methods
@@ -70,6 +70,7 @@
     }
 
     vm.isInRangeRadius = function(){
+      if(vm.latitude && vm.longitude && vm.selectedItem)
       MainService.GetBTSByKecamatan(vm.selectedItem.idKecamatan).then(
         function(response){
           var dist = 0;
@@ -108,7 +109,7 @@
 
     vm.change = function(){
       if(vm.latitude != undefined && vm.longitude != undefined)
-        changeCoordinates(vm.latitude, vm.longitude);
+        changeCoordinates(vm.latitude, vm.longitude, false);
     }
 
     vm.reset = function(){
@@ -116,17 +117,21 @@
       vm.longitude = null;
       vm.inRange = null;
       vm.selectedItem = null;
-      changeCoordinates(-6.3660823, 107.1730974);
+      changeCoordinates(-6.2884815, 107.119828, true);
     }
 
-    function changeCoordinates(lat,long){
+    function changeCoordinates(lat,long, isDefault){
       var map = new mapboxgl.Map({
           container: 'map',
           style: 'mapbox://styles/mapbox/streets-v9',
           center: [long, lat],
-          zoom: 15
+          zoom: 9.2
       });
 
+      if(!isDefault) createMarker(map, lat, long);
+    }
+
+    function createMarker(map, lat, long){
       var marker = new mapboxgl.Marker({
           draggable: true
       })

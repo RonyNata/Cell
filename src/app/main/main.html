@@ -4,7 +4,7 @@
       <md-tab label="Check Menara"> -->
         <md-content class="md-padding" ng-cloak style="background-color: #882424;">
           <div layout-gt-sm="row" layout-align="center center">
-            <div flex-xs flex-gt-xs="70">
+            <div flex-xs flex-gt-xs="80">
               <md-card style="background-color: #57555f;margin-top: 35px;margin-bottom: -10px;" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
                 <md-card-title>
                   <md-card-title-text layout-align="center center" style="color: #dedede">
@@ -13,11 +13,12 @@
                   </md-card-title-text>
                 </md-card-title>
                 <md-card-content>
-                  <md-content class="md-padding" layout-gt-sm="row" style="background: #f0f0f0;margin-bottom: -15px;">
-                    <div flex="50">
-                      <div id="map" style="width: 400px;height: 250px;"></div>
+                  <md-content class="md-padding" layout-gt-sm="row" style="background: #f0f0f0;margin: 0 15px;">
+                    <div flex="45">
+                      <div id="map" style="height: 300px;"></div>
                       <pre id="coordinates" class="coordinates"></pre>
                     </div>
+                    <div flex="5"></div>
                     <div flex="50">
                       <form ng-submit="$event.preventDefault()" name="searchForm">
                         <p></p>
@@ -47,11 +48,19 @@
                         <div layout-gt-sm="row" layout-align="center center">
                           <md-input-container flex="13">
                             <label>Longitude</label>
-                            <input type="number" ng-model="main.longitude" ng-change="main.change()"/>
+                            <input type="number" ng-model="main.longitude" ng-change="main.change()" required name="inputLong"/>
+                            <div ng-messages="searchForm.inputLong.$error" ng-if="searchForm.inputLong.$touched">
+                              <div ng-message="required">Longitude harus diisi.</div>
+                              <div ng-message="number">Longitude harus berupa angka.</div>
+                            </div>
                           </md-input-container>
                           <md-input-container flex="13">
                             <label>Latitude</label>
-                            <input type="number" ng-model="main.latitude" ng-change="main.change()"/>
+                            <input type="number" ng-model="main.latitude" ng-change="main.change()" required name="inputLat"/>
+                            <div ng-messages="searchForm.inputLat.$error" ng-if="searchForm.inputLat.$touched">
+                              <div ng-message="required">Latitude harus diisi.</div>
+                              <div ng-message="number">Latitude harus berupa angka.</div>
+                            </div>
                           </md-input-container>
                         </div>
                         <div layout-gt-sm="row">
