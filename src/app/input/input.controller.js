@@ -130,7 +130,9 @@
     vm.login = function(){
       InputService.Login(vm.loginData).then(
         function(response){
-          sessionStorage.setItem('cred', response.tokenType + ' ' + response.accessToken);
+          // if(navigator.cookieEnabled)
+            InputService.setCookie('cred', response.tokenType + ' ' + response.accessToken, 30);
+          // else sessionStorage.setItem('cred', response.tokenType + ' ' + response.accessToken);
           isLogin();
         }, function(errResponse){
           InputService.showToastrFailed(errResponse.data.message);
@@ -138,15 +140,20 @@
     }
 
     vm.logout = function() {
-        sessionStorage.removeItem('cred');
+        // if(navigator.cookieEnabled) 
+          InputService.deleteCookie();
+        // else sessionStorage.removeItem('cred');
         isLogin();
         vm.loginData = {};
         vm.item = {};
     }
 
     function isLogin(){
-      var cred = sessionStorage.getItem('cred');
-      if(cred != undefined) vm.isLogin = true;
+      // if(navigator.cookieEnabled) var cred = sessionStorage.getItem('cred');
+      if(!navigator.cookieEnabled)
+      alert("Terjadi kesalahan, Cookie pada browser anda dalam keadaan mati. Hidupkan cookie terlebih dahulu.");
+      var cred = InputService.checkCookie();
+      if(cred) vm.isLogin = true;
       else vm.isLogin = false;
     }
 
