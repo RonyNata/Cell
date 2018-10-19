@@ -116,7 +116,7 @@ HTMLJSCSS
 
 table {
   width:100%;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 table, th, td {
   border: 1px solid #505050;
@@ -139,4 +139,16 @@ table#t01 th {
 
 label {
   margin-bottom: 0rem;
+}
+
+@media (min-width: 600px) {
+  .page-card-login {
+    width: 600px;
+  }
+}
+
+@media (min-width: 840px) {
+  .page-card-form {
+    width: 840px;
+  }
 }

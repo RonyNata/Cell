@@ -1,164 +1,187 @@
-<div layout-gt-sm="row" layout-align="center center">
-  <div flex-xs flex-gt-xs="70" ng-if="!input.isLogin">
-  <md-content class="md-padding" style="background-color: #005824">
-    <div layout-gt-sm="row" layout-align="center center">
-      <div flex-xs flex-gt-xs="70">
-        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch style="background-color: #505050; margin-top: 67px">
-          <md-card-title>
-            <md-card-title-text layout-align="center center" style="color: whitesmoke">
-              <span class="md-headline"><b>LOGIN ADMIN APLIKASI</b></span>
-              <span class="md-headline"><b>MENARA TELEKOMUNIKASI</b></span>
-            </md-card-title-text>
-          </md-card-title>
+<div ng-if="!input.isLogin">
+  <div class="card page-card-login" style="background-color: #505050; color: whitesmoke; margin: 70px auto">
+    <div class="card-body">
+      <h3 class="card-title text-center"><strong>LOGIN ADMIN APLIKASI<br>MENARA TELEKOMUNIKASI</strong></h3>
 
-          <md-card-content>
-            <md-content class="md-padding" layout-gt-sm="row" style="background: #f0f0f0; margin: 20px">
-              <div flex="100" layout-align="center center">
-                <form ng-submit="$event.preventDefault()" name="searchForm">
-                  <div layout-gt-sm="row" layout-align="center center">
-                    <md-input-container flex="60">
+      <div class="card" style="margin: 15px; padding: 10px; background-color: whitesmoke">
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-12">
+              <form ng-submit="$event.preventDefault()" name="searchForm" style="padding: 10px 30px">
+                <div class="row">
+                  <div class="col-md-12">
+                    <md-input-container style="width: 100%">
                       <label>USERNAME</label>
                       <input type="text" ng-model="input.loginData.user"/>
                     </md-input-container>
                   </div>
-                  <div layout-gt-sm="row" layout-align="center center">
-                    <md-input-container flex="60">
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <md-input-container style="width: 100%">
                       <label>PASSWORD</label>
                       <input type="password" ng-model="input.loginData.password"/>
                     </md-input-container>
                   </div>
-                  <div layout-gt-sm="row" layout-align="center center">
-                    <md-input-container flex="60">
-                      <md-button class="md-raised md-primary" ng-click="input.login()" style="margin-top: -3px;width: 100%">Masuk</md-button>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <md-button class="md-raised md-primary" ng-click="input.login()" style="width: 100%" >Masuk</md-button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-if="input.isLogin">
+  <div class="page-card-form text-right" style="margin: 20px auto; margin-bottom: 0px">
+    <md-button class="md-warn md-raised md-hue-2" ng-click="input.logout()">Log out</md-button>
+  </div>
+
+  <div class="card page-card-form" style="background-color: #505050; color: whitesmoke; margin: 0px auto">
+    <div class="card-body">
+      <h3 class="card-title text-center"><strong>TAMBAH DATA CELL BTS</strong></h3>
+
+      <div class="card" style="margin: 15px; padding: 20px; background-color: whitesmoke">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form ng-submit="$event.preventDefault()" name="searchForm">
+                <div class="row">
+                  <div class="col-md-12">
+                    <md-autocomplete required
+                                     md-input-name="autocompleteField"
+                                     md-input-minlength="2"
+                                     md-input-maxlength="18"
+                                     md-no-cache="input.noCache"
+                                     md-selected-item="input.selectedItem"
+                                     md-search-text="input.searchText"
+                                     md-items="item in input.querySearch(input.searchText)"
+                                     md-item-text="item.namaKecamatan"
+                                     md-selected-item-change="input.getSuggestNextCode()"
+                                     md-require-match
+                                     md-floating-label="Pilih Kecamatan">
+                      <md-item-template>
+                        <span md-highlight-text="input.searchText">{{item.namaKecamatan}}</span>
+                      </md-item-template>
+                      <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+                        <div ng-message="required">Anda <b>harus</b> memilih kecamatan terlebih dahulu.</div>
+                        <div ng-message="md-require-match">Pilih Kecamatan yang tersedia.</div>
+                        <div ng-message="minlength">Terlalu panjang.</div>
+                        <div ng-message="maxlength">Terlalu pendek.</div>
+                      </div>
+                    </md-autocomplete>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <md-input-container style="width: 100%">
+                      <label>Kode Cell BTS</label>
+                      <input type="text" ng-model="input.item.kodeCellBts"/>
                     </md-input-container>
                   </div>
-                </form>
-              </div>
-            </md-content>
-          </md-card-content>
-          <md-card-actions layout="row" layout-align="end center"></md-card-actions>
-        </md-card>
-      </div>
-    </div>
-  </md-content>
-</div>
-<div flex-xs flex-gt-xs="70" ng-if="input.isLogin">
-<div layout-gt-sm="row" layout-align="end">
-    <md-button class="md-warn md-raised md-hue-2" ng-click="input.logout()" style="margin: 10px 5px 0px 5px;" >Log out</md-button>
-</div>
-<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch style="margin-top : 20px; background-color: #505050">
-    <md-card-title>
-      <md-card-title-text layout-align="center center" style="color: whitesmoke">
-        <span class="md-headline"><b>TAMBAH DATA CELL BTS</b></span>
-      </md-card-title-text>
-    </md-card-title>
-    <md-content class="md-padding" style="margin: 50px; margin-top: 15px">
-      <form ng-submit="$event.preventDefault()" name="searchForm">
-        <p></p>
-        <div layout-gt-sm="row" layout-align="center center">
-          <md-autocomplete flex="33" required
-              md-input-name="autocompleteField"
-              md-input-minlength="2"
-              md-input-maxlength="18"
-              md-no-cache="input.noCache"
-              md-selected-item="input.selectedItem"
-              md-search-text="input.searchText"
-              md-items="item in input.querySearch(input.searchText)"
-              md-item-text="item.namaKecamatan"
-              md-selected-item-change="input.getSuggestNextCode()"
-              md-require-match
-              md-floating-label="Pilih Kecamatan">
-            <md-item-template>
-              <span md-highlight-text="input.searchText">{{item.namaKecamatan}}</span>
-            </md-item-template>
-            <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
-              <div ng-message="required">Anda <b>harus</b> memilih kecamatan terlebih dahulu.</div>
-              <div ng-message="md-require-match">Pilih Kecamatan yang tersedia.</div>
-              <div ng-message="minlength">Terlalu panjang.</div>
-              <div ng-message="maxlength">Terlalu pendek.</div>
+                  <div class="col-md-6">
+                    <md-input-container style="width: 100%">
+                      <label>Radius</label>
+                      <input type="number" ng-model="input.item.radiusCellBts"/>
+                    </md-input-container>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <md-input-container style="width: 100%">
+                      <label>Longitude</label>
+                      <input type="number" ng-model="input.item.longCellBts"/>
+                    </md-input-container>
+                  </div>
+                  <div class="col-md-6">
+                    <md-input-container style="width: 100%">
+                      <label>Latitude</label>
+                      <input type="number" ng-model="input.item.latCellBts"/>
+                    </md-input-container>
+                  </div>
+                </div>
+
+                <div class="row" ng-if="input.jumlah">
+                  <div class="col-md-12 text-center">
+                    Jumlah data Cell BTS <b>{{input.jumlah}}</b>, saran kode selanjutnya : <b>{{input.suggestNextBtsCode}}</b>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12 text-right">
+                    <md-button class="md-raised md-primary" ng-click="input.save()">Simpan</md-button>
+                  </div>
+                </div>
+              </form>
             </div>
-          </md-autocomplete>
-          <!-- <md-button class="md-raised md-basic" ng-click="input.getSuggestNextCode()" style="margin-bottom:30px;">Genarate kode selanjutnya</md-button> -->
-        </div>
-        <div layout-gt-sm="row" layout-align="center center">
-          <md-input-container flex="13">
-            <label>Kode Cell BTS</label>
-            <input type="text" ng-model="input.item.kodeCellBts"/>
-          </md-input-container>
-          <md-input-container flex="13">
-            <label>Radius</label>
-            <input type="number" ng-model="input.item.radiusCellBts"/>
-          </md-input-container>
-        </div>
-        <div layout-gt-sm="row" layout-align="center center">
-          <md-input-container flex="13">
-            <label>Longitude</label>
-            <input type="number" ng-model="input.item.longCellBts"/>
-          </md-input-container>
-          <md-input-container flex="13">
-            <label>Latitude</label>
-            <input type="number" ng-model="input.item.latCellBts"/>
-          </md-input-container>
-        </div>
-        <div ng-if="input.jumlah" layout-align="center center" style="text-align : center">
-          Jumlah data Cell BTS <b>{{input.jumlah}}</b>, saran kode selanjutnya : <b>{{input.suggestNextBtsCode}}</b>
-        </div>
-        <div layout="row" layout-align="center center" style="margin : 10px 0px 10px 0px;">
-          <!-- <md-button class="md-raised md-primary" ng-click="input.getBTS()" ng-if="!input.jumlah">Tampilkan Jumlah</md-button> -->
-          <md-button class="md-raised md-primary" ng-click="input.save()" style="margin-left:300px; padding:0px 40px 0px 40px;">Simpan</md-button>
-        </div>
-      </form>
-    </md-content>
-</md-card>
-<div ng-if="input.listBts.length">
-  <h1 style="color: whitesmoke">DAFTAR CELL BTS</h1>
-
-  <table id="t01">
-    <tr>
-      <th>NO</th>
-      <th width=30%>KECAMATAN</th>
-      <th width=10%>KODE CELL BTS PER KECAMATAN</th>
-      <th>RADIUS</th>
-      <th>LONGITUDE</th>
-      <th>LATTITUDE</th>
-      <th>ACTION</th>
-    </tr>
-
-    <tr ng-repeat="bts in filteredData">
-      <td>{{$index + 1 + (currentPageList * numPerPageList)}}</td>
-      <td style="text-align: left" >{{input.selectedItem.namaKecamatan}}</td>
-      <td>{{bts.kodeCellBts}}</td>
-      <td>{{bts.radiusCellBts}}</td>
-      <td>{{bts.longCellBts}}</td>
-      <td>{{bts.latCellBts}}</td>
-      <td>
-        <md-button class="md-warn md-raised md-hue-2" ng-click="input.deleteCellBTS(bts.kodeCellBts)">hapus</md-button>
-      </td>
-    </tr>
-  </table>
-  <div layout-gt-sm="row" layout-align="center center">
-    <div class="row">
-      <div class="col-md-12">
-          <div class="align-center">
-              <ul style="padding-left: 0px;">
-                  <li style="display: inline-block;">
-                      <md-button class="md-raised md-primary" ng-click="padList(-1)" ng-disabled="currentPageList==0" aria-label="Use Android" type="button" style="cursor: pointer;">
-                          &lt; Sebelumnya
-                      </md-button>
-                  </li>
-                  <li style="display: inline-block;">
-                      <span style="margin-left:15px;margin-right: 15px;display: inline-block; color: whitesmoke">Halaman {{currentPageList+1}} Dari {{maxSizeList}}</span>
-                  </li>
-                  <li style="display: inline-block;">
-                      <md-button class="md-raised md-primary" ng-click="padList(1)" ng-disabled="maxList()" aria-label="Use Android" type="button" style="cursor: pointer;">
-                          Selanjutnya &gt;
-                      </md-button>
-                  </li>
-              </ul>
           </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <div class="page-card-form" style="margin: 20px auto" ng-if="input.listBts.length">
+
+    <h1 style="color: whitesmoke">DAFTAR CELL BTS</h1>
+
+    <div style="overflow-x:auto;">
+      <table id="t01">
+        <tr>
+          <th>NO</th>
+          <th width=30%>KECAMATAN</th>
+          <th width=10%>KODE CELL BTS PER KECAMATAN</th>
+          <th>RADIUS</th>
+          <th>LONGITUDE</th>
+          <th>LATTITUDE</th>
+          <th>ACTION</th>
+        </tr>
+
+        <tr ng-repeat="bts in filteredData">
+          <td>{{$index + 1 + (currentPageList * numPerPageList)}}</td>
+          <td style="text-align: left" >{{input.selectedItem.namaKecamatan}}</td>
+          <td>{{bts.kodeCellBts}}</td>
+          <td>{{bts.radiusCellBts}}</td>
+          <td>{{bts.longCellBts}}</td>
+          <td>{{bts.latCellBts}}</td>
+          <td>
+            <md-button class="md-warn md-raised md-hue-2" ng-click="input.deleteCellBTS(bts.kodeCellBts)">hapus</md-button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-md-12">
+        <div class="align-center">
+          <ul style="padding-left: 0px;">
+            <li style="display: inline-block;">
+              <md-button class="md-raised md-primary" ng-click="padList(-1)" ng-disabled="currentPageList==0" aria-label="Use Android" type="button" style="cursor: pointer;">
+                &lt; Sebelumnya
+              </md-button>
+            </li>
+            <li style="display: inline-block;">
+              <span style="margin-left:15px;margin-right: 15px;display: inline-block; color: whitesmoke">Halaman {{currentPageList+1}} Dari {{maxSizeList}}</span>
+            </li>
+            <li style="display: inline-block;">
+              <md-button class="md-raised md-primary" ng-click="padList(1)" ng-disabled="maxList()" aria-label="Use Android" type="button" style="cursor: pointer;">
+                Selanjutnya &gt;
+              </md-button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
   </div>
- </div>
+
 </div>
