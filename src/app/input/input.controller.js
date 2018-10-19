@@ -6,7 +6,7 @@
     .controller('InputController', InputController);
 
   /** @ngInject */
-  function InputController($timeout, webDevTec, toastr, $q, MainService, InputService, $log) {
+  function InputController($timeout, webDevTec, toastr, $q, MainService, InputService, $log, $scope) {
     var vm = this;
 
     // list of `state` value/display objects
@@ -106,6 +106,7 @@
             } else {
                 vm.item.kodeCellBts = vm.selectedItem.idKecamatan+"-001";
             }
+            pagingList();
           }, function(errResponse){
             $log(errResponse);
           })
@@ -186,6 +187,36 @@
         }, function(errResponse){
           $log(errResponse);
         })
+    }
+
+    function pagingList(){
+        $scope.filteredData = [];
+        $scope.currentPageList = 0;
+        $scope.numPerPageList = 5;
+        $scope.maxSizeList = Math.ceil(vm.listBts.length/$scope.numPerPageList);
+        function pageList(){
+            $scope.pageList = [];
+            for(var i = 0; i < vm.listBts.length/$scope.numPerPageList; i++){
+                $scope.pageList.push(i+1);
+            }
+        }
+        pageList();
+        $scope.padList = function(i){
+            $scope.currentPageList += i;
+        }
+
+        $scope.maxList = function(){
+            if($scope.currentPageList >= $scope.maxSizeList - 1)
+                return true;
+            else return false;
+        }
+
+        $scope.$watch("currentPageList + numPerPageList", function() {
+            var begin = (($scope.currentPageList) * $scope.numPerPageList)
+                , end = begin + $scope.numPerPageList;
+
+            $scope.filteredData = vm.listBts.slice(begin, end);
+        });
     }
   }
 })();

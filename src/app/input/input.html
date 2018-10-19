@@ -124,8 +124,8 @@
       <th>ACTION</th>
     </tr>
 
-    <tr ng-repeat="bts in input.listBts">
-      <td>{{$index + 1}}</td>
+    <tr ng-repeat="bts in filteredData">
+      <td>{{$index + 1 + (currentPageList * numPerPageList)}}</td>
       <td style="text-align: left" >{{input.selectedItem.namaKecamatan}}</td>
       <td>{{bts.kodeCellBts}}</td>
       <td>{{bts.radiusCellBts}}</td>
@@ -136,7 +136,29 @@
       </td>
     </tr>
   </table>
-
+  <div layout-gt-sm="row" layout-align="center center">
+    <div class="row">
+      <div class="col-md-12">
+          <div class="align-center">
+              <ul style="padding-left: 0px;">
+                  <li style="display: inline-block;">
+                      <md-button class="md-raised md-primary" ng-click="padList(-1)" ng-disabled="currentPageList==0" aria-label="Use Android" type="button" style="cursor: pointer;">
+                          &lt; Sebelumnya
+                      </md-button>
+                  </li>
+                  <li style="display: inline-block;">
+                      <span style="margin-left:15px;margin-right: 15px;display: inline-block; color: whitesmoke">Halaman {{currentPageList+1}} Dari {{maxSizeList}}</span>
+                  </li>
+                  <li style="display: inline-block;">
+                      <md-button class="md-raised md-primary" ng-click="padList(1)" ng-disabled="maxList()" aria-label="Use Android" type="button" style="cursor: pointer;">
+                          Selanjutnya &gt;
+                      </md-button>
+                  </li>
+              </ul>
+          </div>
+      </div>
+    </div>
+  </div>
   </div>
  </div>
 </div>
