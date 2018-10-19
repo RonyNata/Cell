@@ -51,7 +51,12 @@
 
         service.Login = function (data) {
             var deferred = $q.defer();
-            $http.post(API + 'login-secure/', data).then(
+            $http.post(API + 'login-secure/', data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic QWRtaW46YWRtaW4='
+                }
+            }).then(
                 function (response){
                     deferred.resolve(response.data);
                 },

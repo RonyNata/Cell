@@ -1,34 +1,25 @@
-<div ng-cloak style="background-color: #882424;">
+<div ng-cloak style="background-color: #005824;">
   <md-content ng-cloak style="background-color: #882424;">
     <!-- <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Check Menara"> -->
-        <md-content class="md-padding" ng-cloak style="background-color: #882424;">
+        <md-content class="md-padding" ng-cloak style="background-color: #005824;">
           <div layout-gt-sm="row" layout-align="center center">
             <div flex-xs flex-gt-xs="70">
-              <md-card style="background-color: #57555f;margin-top: 35px;margin-bottom: -10px;" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-                <md-card-title style="margin-top: -20px;margin-bottom: -20px;">
-                  <md-card-title-text layout-align="center center" style="color: #dedede">
-                    <div layout="row">
-                      <div flex="40">
-                        <md-content style="background-color: #57555f;float: right;">
-                          <img src="assets/images/Bekasi.png" width="200px" style="position: relative;">
-                        </md-content>
-                      </div>
-                      <div flex="5" style="border-left: 6px solid #dedede;height: 100px;margin-top: 20px;"></div>
-                      <div flex="50" style="margin-top: 40px;position: relative;">
-                        <span class="md-headline"><b>CEK KOORDINAT REKOMENDASI</b></span>
-                        <span class="md-headline"><b>MENARA TELEKOMUNIKASI</b></span>
-                      </div>
-                    </div>
+              <md-card style="background-color: #505050; margin-top: 35px;margin-bottom: -10px;" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                <md-card-title>
+                  <md-card-title-text layout-align="center center" style="color: whitesmoke">
+                    <span class="md-headline"><b>TITIK KOORDINAT MENARA</b></span>
+                    <span class="md-headline"><b>TELEKOMUNIKASI</b></span>
                   </md-card-title-text>
                 </md-card-title>
-                <md-card-content >
-                  <md-content class="md-padding" layout-gt-sm="row" style="background: #f0f0f0;margin-bottom: -15px;">
-                    <div flex="50" class="flex">
-                      <div id="map" style="width: 400px;height: 250px;"></div>
+                <md-card-content>
+                  <md-content class="md-padding" layout-gt-sm="row" style="background: #f0f0f0;margin: 0 15px;">
+                    <div flex="45">
+                      <div id="map" style="height: 300px;"></div>
                       <pre id="coordinates" class="coordinates"></pre>
                     </div>
-                    <div flex="50" class="flex">
+                    <div flex="5"></div>
+                    <div flex="50">
                       <form ng-submit="$event.preventDefault()" name="searchForm">
                         <p></p>
                         <div layout-gt-sm="row" layout-align="center center">
@@ -57,11 +48,19 @@
                         <div layout-gt-sm="row" layout-align="center center">
                           <md-input-container flex="13">
                             <label>Longitude</label>
-                            <input type="number" ng-model="main.longitude" ng-change="main.change()"/>
+                            <input type="number" ng-model="main.longitude" ng-change="main.change()" required name="inputLong"/>
+                            <div ng-messages="searchForm.inputLong.$error" ng-if="searchForm.inputLong.$touched">
+                              <div ng-message="required">Longitude harus diisi.</div>
+                              <div ng-message="number">Longitude harus berupa angka.</div>
+                            </div>
                           </md-input-container>
                           <md-input-container flex="13">
                             <label>Latitude</label>
-                            <input type="number" ng-model="main.latitude" ng-change="main.change()"/>
+                            <input type="number" ng-model="main.latitude" ng-change="main.change()" required name="inputLat"/>
+                            <div ng-messages="searchForm.inputLat.$error" ng-if="searchForm.inputLat.$touched">
+                              <div ng-message="required">Latitude harus diisi.</div>
+                              <div ng-message="number">Latitude harus berupa angka.</div>
+                            </div>
                           </md-input-container>
                         </div>
                         <div layout-gt-sm="row">
