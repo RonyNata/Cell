@@ -42,7 +42,7 @@ html {
 }
 
 html, body {
-  background-color: #882424;
+  background-color: #005824;
 }
 
 [layout=row] {
@@ -119,7 +119,7 @@ table {
   margin-bottom: 30px;
 }
 table, th, td {
-  border: 1px solid #57555f;
+  border: 1px solid #505050;
   border-collapse: collapse;
 }
 th, td {
