@@ -136,3 +136,7 @@ table#t01 th {
   background-color: #57555f;
   color: white;
 }
+
+label {
+  margin-bottom: 0rem;
+}
