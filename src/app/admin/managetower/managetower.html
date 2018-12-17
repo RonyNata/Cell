@@ -1,0 +1,143 @@
+<acme-navbar></acme-navbar>
+
+<div class="container" style="margin-top: 20px">
+  <div class="card page-card-form" style="background-color: #505050; color: whitesmoke; margin: 0px auto">
+    <div class="card-body">
+      <h3 class="card-title text-center"><strong>TAMBAH DATA CELL BTS</strong></h3>
+
+      <div class="card" style="margin: 15px; padding: 20px; background-color: whitesmoke">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form ng-submit="$event.preventDefault()" name="searchForm">
+                <div class="row">
+                  <div class="col-md-12">
+                    <md-autocomplete required
+                                     md-input-name="autocompleteField"
+                                     md-input-minlength="2"
+                                     md-input-maxlength="18"
+                                     md-no-cache="managetower.noCache"
+                                     md-selected-item="managetower.selectedItem"
+                                     md-search-text="managetower.searchText"
+                                     md-items="item in managetower.querySearch(managetower.searchText)"
+                                     md-item-text="item.namaKecamatan"
+                                     md-selected-item-change="managetower.getSuggestNextCode()"
+                                     md-require-match
+                                     md-floating-label="Pilih Kecamatan">
+                      <md-item-template>
+                        <span md-highlight-text="managetower.searchText">{{item.namaKecamatan}}</span>
+                      </md-item-template>
+                      <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+                        <div ng-message="required">Anda <b>harus</b> memilih kecamatan terlebih dahulu.</div>
+                        <div ng-message="md-require-match">Pilih Kecamatan yang tersedia.</div>
+                        <div ng-message="minlength">Terlalu panjang.</div>
+                        <div ng-message="maxlength">Terlalu pendek.</div>
+                      </div>
+                    </md-autocomplete>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <md-input-container style="width: 100%">
+                      <label>Kode Cell BTS</label>
+                      <input type="text" ng-model="managetower.item.kodeCellBts"/>
+                    </md-input-container>
+                  </div>
+                  <div class="col-md-6">
+                    <md-input-container style="width: 100%">
+                      <label>Radius</label>
+                      <input type="number" ng-model="managetower.item.radiusCellBts"/>
+                    </md-input-container>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <md-input-container style="width: 100%">
+                      <label>Longitude</label>
+                      <input type="number" ng-model="managetower.item.longCellBts"/>
+                    </md-input-container>
+                  </div>
+                  <div class="col-md-6">
+                    <md-input-container style="width: 100%">
+                      <label>Latitude</label>
+                      <input type="number" ng-model="managetower.item.latCellBts"/>
+                    </md-input-container>
+                  </div>
+                </div>
+
+                <div class="row" ng-if="managetower.jumlah">
+                  <div class="col-md-12 text-center">
+                    Jumlah data Cell BTS <b>{{managetower.jumlah}}</b>, saran kode selanjutnya : <b>{{managetower.suggestNextBtsCode}}</b>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12 text-right">
+                    <md-button class="md-raised md-primary" ng-click="managetower.save()">Simpan</md-button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-card-form" style="margin: 20px auto" ng-if="managetower.listBts.length">
+
+    <h1 style="color: whitesmoke">DAFTAR MENARA</h1>
+
+    <div style="overflow-x:auto;">
+      <table id="t01">
+        <tr>
+          <th>NO</th>
+          <th width=30%>KECAMATAN</th>
+          <th width=10%>KODE CELL BTS PER KECAMATAN</th>
+          <th>RADIUS</th>
+          <th>LONGITUDE</th>
+          <th>LATTITUDE</th>
+          <th>ACTION</th>
+        </tr>
+
+        <tr ng-repeat="bts in filteredData">
+          <td>{{$index + 1 + (currentPageList * numPerPageList)}}</td>
+          <td style="text-align: left" >{{managetower.selectedItem.namaKecamatan}}</td>
+          <td>{{bts.kodeCellBts}}</td>
+          <td>{{bts.radiusCellBts}}</td>
+          <td>{{bts.longCellBts}}</td>
+          <td>{{bts.latCellBts}}</td>
+          <td>
+            <md-button class="md-warn md-raised md-hue-2" ng-click="managetower.deleteCellBTS(bts.kodeCellBts)">hapus</md-button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-md-12">
+        <div class="align-center">
+          <ul style="padding-left: 0px;">
+            <li style="display: inline-block;">
+              <md-button class="md-raised md-primary" ng-click="padList(-1)" ng-disabled="currentPageList==0" aria-label="Use Android" type="button" style="cursor: pointer;">
+                &lt; Sebelumnya
+              </md-button>
+            </li>
+            <li style="display: inline-block;">
+              <span style="margin-left:15px;margin-right: 15px;display: inline-block; color: whitesmoke">Halaman {{currentPageList+1}} Dari {{maxSizeList}}</span>
+            </li>
+            <li style="display: inline-block;">
+              <md-button class="md-raised md-primary" ng-click="padList(1)" ng-disabled="maxList()" aria-label="Use Android" type="button" style="cursor: pointer;">
+                Selanjutnya &gt;
+              </md-button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

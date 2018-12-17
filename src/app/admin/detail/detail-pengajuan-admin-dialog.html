@@ -1,0 +1,90 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2><strong>DETAIL PENGAJUAN TITIK MENARA</strong></h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px;min-width:600px;min-height:405px;padding: 10px;padding-left: 20px; padding-right: 20px">
+      <div class="row">
+        <div class="col-md-12">
+          <table style="border: 0px">
+            <tr>
+              <td class="text-left" style="padding: 5px; border: 0px">Nama Perusahaan</td>
+              <td class="text-left" style="padding: 5px; border: 0px">:</td>
+              <td class="text-left" style="padding: 5px; border: 0px">PT. TELEKOMUNIKASI INDONESIA</td>
+            </tr>
+            <tr>
+              <td class="text-left" style="padding: 5px; border: 0px">NPWP</td>
+              <td class="text-left" style="padding: 5px; border: 0px">:</td>
+              <td class="text-left" style="padding: 5px; border: 0px">123456789</td>
+            </tr>
+            <tr>
+              <td class="text-left" style="padding: 5px; border: 0px">Alamat</td>
+              <td class="text-left" style="padding: 5px; border: 0px">:</td>
+              <td class="text-left" style="padding: 5px; border: 0px">Jl. Sukamahi</td>
+            </tr>
+            <tr>
+              <td class="text-left" style="padding: 5px; border: 0px">No Telepon</td>
+              <td class="text-left" style="padding: 5px; border: 0px">:</td>
+              <td class="text-left" style="padding: 5px; border: 0px">(002) 6879093</td>
+            </tr>
+            <tr>
+              <td class="text-left" style="padding: 5px; border: 0px">E-mail</td>
+              <td class="text-left" style="padding: 5px; border: 0px">:</td>
+              <td class="text-left" style="padding: 5px; border: 0px">telekomunikasi_id@gmail.com</td>
+            </tr>
+            <tr>
+              <td class="text-left" style="padding: 5px; border: 0px">Nama Pemilik Perusahaan</td>
+              <td class="text-left" style="padding: 5px; border: 0px">:</td>
+              <td class="text-left" style="padding: 5px; border: 0px">Atep Salman</td>
+            </tr>
+            <tr>
+              <td class="text-left" style="padding: 5px; border: 0px">Status Pengajuan</td>
+              <td class="text-left" style="padding: 5px; border: 0px">:</td>
+              <td class="text-left" style="padding: 5px; border: 0px">Diterima</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <table id="t01">
+            <tr>
+              <th>Jenis Dokumen</th>
+              <th>Action</th>
+            </tr>
+
+            <tr>
+              <td class="text-left">Scan NPWP Berwarna (Ukuran Maksimal 1000 Kb)</td>
+              <td class="text-left">
+                <button type="button" class="btn btn-success"><i class="fas fa-download"></i> Download</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="text-left">Dokumen Pengajuan Titik Menara (Ukuran Maksimal 2000 Kb, pdf)</td>
+              <td class="text-left">
+                <button type="button" class="btn btn-success"><i class="fas fa-download"></i> Download</button>
+              </td>
+            </tr>
+
+          </table>
+        </div>
+      </div>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button class="md-raised md-primary" ng-click="answer('useful')" style="margin-right:20px; margin-bottom: 20px" >
+        Submit
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

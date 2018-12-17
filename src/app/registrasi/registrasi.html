@@ -1,0 +1,113 @@
+<div style="margin-top: 20px">
+  <div class="card" style="background-color: #505050; color: whitesmoke; width: 90vw; margin: 0px auto">
+    <div class="card-body">
+      <h3 class="card-title text-center"><strong>FORM REGISTRASI</strong></h3>
+
+      <div class="card" style="margin: 15px; padding: 10px; background-color: whitesmoke">
+        <form ng-submit="$event.preventDefault()" name="searchForm">
+	        <div class="card-body">
+	          <div class="row">
+	            <div class="col-md-6">
+	              	<div class="row">
+	                  <div class="col-md-12">
+	                    <h3 style="color: black"><strong>Data Diri Registrasi</strong></h3>
+	                  </div>
+	                </div>
+	              	<div class="row">
+	                  <div class="col-md-12">
+	                    <md-input-container style="width: 100%">
+	                      <label>Nama Perusahaan</label>
+	                      <input type="text" ng-model="main.longitude" ng-change="main.change()" required name="inputLong"/>
+	                      <div ng-messages="searchForm.inputLong.$error" ng-if="searchForm.inputLong.$touched">
+	                        <div ng-message="required">form harus diisi.</div>
+	                      </div>
+	                    </md-input-container>
+	                  </div>
+	                </div>
+	                <div class="row">
+	                  <div class="col-md-12">
+	                    <md-input-container style="width: 100%">
+	                      <label>Nama Pendaftar</label>
+	                      <input type="text" ng-model="main.longitude" ng-change="main.change()" required name="inputLong"/>
+	                      <div ng-messages="searchForm.inputLong.$error" ng-if="searchForm.inputLong.$touched">
+	                        <div ng-message="required">form harus diisi.</div>
+	                      </div>
+	                    </md-input-container>
+	                  </div>
+	                </div>
+	                <div class="row">
+	                  <div class="col-md-12">
+	                    <md-input-container style="width: 100%">
+	                      <label>Alamat Perusahaan</label>
+	                      <input type="text" ng-model="main.longitude" ng-change="main.change()" required name="inputLong"/>
+	                      <div ng-messages="searchForm.inputLong.$error" ng-if="searchForm.inputLong.$touched">
+	                        <div ng-message="required">form harus diisi.</div>
+	                      </div>
+	                    </md-input-container>
+	                  </div>
+	                </div>
+	                <div class="row">
+		              <div class="col-md-12">
+		                <md-input-container style="width: 100%">
+		                  <label>No. Telepon yang dapat dihubungi</label>
+		                  <input type="number" ng-model="main.longitude" ng-change="main.change()" required name="inputLong"/>
+		                  <div ng-messages="searchForm.inputLong.$error" ng-if="searchForm.inputLong.$touched">
+		                    <div ng-message="required">form harus diisi.</div>
+		                    <div ng-message="number">isian form harus berupa angka.</div>
+		                  </div>
+		                </md-input-container>
+		              </div>
+		            </div>
+	            </div>
+	            <div class="col-md-6">
+	            	<div class="row">
+	                  <div class="col-md-12">
+	                    <h3 style="color: black"><strong>Data Akun</strong></h3>
+	                  </div>
+	                </div>
+		            <div class="row">
+		              <div class="col-md-12">
+		                <md-input-container style="width: 100%">
+		                  <label>E-mail</label>
+		                  <input type="email" ng-model="main.longitude" ng-change="main.change()" required name="inputLong"/>
+		                  <div ng-messages="searchForm.inputLong.$error" ng-if="searchForm.inputLong.$touched">
+		                    <div ng-message="required">form harus diisi.</div>
+		                    <div ng-message="email">harus menggunakan format email.</div>
+		                  </div>
+		                </md-input-container>
+		              </div>
+		            </div>
+
+		            <div class="row">
+		        	  <div class="col-md-12">
+		                <md-input-container style="width: 100%">
+		                  <label>Password</label>
+		                  <input type="text" ng-model="main.latitude" ng-change="main.change()" required name="inputLat"/>
+		                  <div ng-messages="searchForm.inputLat.$error" ng-if="searchForm.inputLat.$touched">
+		                    <div ng-message="required">form harus diisi.</div>
+		                  </div>
+		                </md-input-container>
+		              </div>
+		            </div>
+	            </div>
+	          </div>
+	          <div class="row">
+	              <div class="col-md-12">
+	                <md-button class="md-raised md-primary" ng-click="main.isInRangeRadius()" style="width: 100%">Submit</md-button>
+	              </div>
+	            </div>
+	        </div>
+		</form>
+      </div>
+
+      <div class="text-center">
+        <md-toolbar md-colors="{background: '{{main.inRange ? 'light-green' : 'red'}}'}" ng-if="main.inRange != undefined">
+          <div class="md-toolbar-tools" layout-align="center center">
+            <h2 class="md-flex" style="font-weight: bold;color: white;">Data Berhasil Dibuat Silahkan Login. Klik Disini</h2>
+          </div>
+        </md-toolbar>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2><strong>FORM PENGAJUAN TITIK MENARA</strong></h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px;min-width:600px;min-height:405px;padding: 10px;padding-left: 20px; padding-right: 20px">
+      <div class="row">
+        <div class="col-md-12">
+          <md-autocomplete required
+                           md-input-name="autocompleteField"
+                           md-input-minlength="2"
+                           md-input-maxlength="18"
+                           md-no-cache="main.noCache"
+                           md-selected-item="main.selectedItem"
+                           md-search-text="main.searchText"
+                           md-items="item in main.querySearch(main.searchText)"
+                           md-item-text="item.namaKecamatan"
+                           md-require-match
+                           md-floating-label="Pilih Kecamatan">
+            <md-item-template>
+              <span md-highlight-text="main.searchText">{{item.namaKecamatan}}</span>
+            </md-item-template>
+            <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+              <div ng-message="required">Anda <b>harus</b> memilih kecamatan terlebih dahulu.</div>
+              <div ng-message="md-require-match">Pilih Kecamatan yang tersedia.</div>
+              <div ng-message="minlength">Terlalu panjang.</div>
+              <div ng-message="maxlength">Terlalu pendek.</div>
+            </div>
+          </md-autocomplete>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <md-input-container style="width: 100%; margin-top: 0">
+            <label>Longitude</label>
+            <input type="number" ng-model="main.longitude" ng-change="main.change()" required name="inputLong"/>
+            <div ng-messages="searchForm.inputLong.$error" ng-if="searchForm.inputLong.$touched">
+              <div ng-message="required">Longitude harus diisi.</div>
+              <div ng-message="number">Longitude harus berupa angka.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div class="col-md-6">
+          <md-input-container style="width: 100%; margin-top: 0"">
+            <label>Latitude</label>
+            <input type="number" ng-model="main.latitude" ng-change="main.change()" required name="inputLat"/>
+            <div ng-messages="searchForm.inputLat.$error" ng-if="searchForm.inputLat.$touched">
+              <div ng-message="required">Latitude harus diisi.</div>
+              <div ng-message="number">Latitude harus berupa angka.</div>
+            </div>
+          </md-input-container>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <table id="t01">
+            <tr>
+              <th>Jenis Dokumen</th>
+              <th>Action</th>
+            </tr>
+
+            <tr>
+              <td class="text-left">Scan NPWP Berwarna (Ukuran Maksimal 1000 Kb)</td>
+              <td class="text-left">
+                <form>
+                  <div class="form-group">
+                    <input type="file" class="form-control-file" id="npwp">
+                  </div>
+                </form>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="text-left">Dokumen Pengajuan Titik Menara (Ukuran Maksimal 2000 Kb, pdf)</td>
+              <td class="text-left">
+                <form>
+                  <div class="form-group">
+                    <input type="file" class="form-control-file" id="dokumenPengajuan">
+                  </div>
+                </form>
+              </td>
+            </tr>
+
+          </table>
+        </div>
+      </div>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button class="md-raised md-primary" ng-click="answer('useful')" style="margin-right:20px; margin-bottom: 20px" >
+        Submit
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
