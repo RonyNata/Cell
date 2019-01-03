@@ -49,12 +49,12 @@
             return deferred.promise;
         };
 
-        service.Login = function (data) {
+        service.Login = function (data) {console.log(data);
             var deferred = $q.defer();
             $http.post(API + 'login-secure/', data, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Basic QWRtaW46YWRtaW4='
+                    'Authorization': 'Basic '+btoa(data.user+':'+data.password)
                 }
             }).then(
                 function (response){
@@ -122,6 +122,8 @@
 
         service.deleteCookie = function(){
             service.setCookie('cred','',30);
+            service.setCookie('role','',30);
+            service.setCookie('user','',30);
         }
 
         return service;

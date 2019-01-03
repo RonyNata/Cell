@@ -4,7 +4,7 @@
       <h3 class="card-title text-center"><strong>FORM REGISTRASI</strong></h3>
 
       <div class="card" style="margin: 15px; padding: 10px; background-color: whitesmoke">
-        <form ng-submit="$event.preventDefault()" name="searchForm">
+        <form ng-submit="registrasi.save()" name="searchForm">
 	        <div class="card-body">
 	          <div class="row">
 	            <div class="col-md-6">
@@ -17,8 +17,8 @@
 	                  <div class="col-md-12">
 	                    <md-input-container style="width: 100%">
 	                      <label>Nama Perusahaan</label>
-	                      <input type="text" ng-model="main.longitude" ng-change="main.change()" required name="inputLong"/>
-	                      <div ng-messages="searchForm.inputLong.$error" ng-if="searchForm.inputLong.$touched">
+	                      <input type="text" ng-model="registrasi.item.namaPerusahaan" required name="inputPerusahaan"/>
+	                      <div ng-messages="searchForm.inputPerusahaan.$error" ng-if="searchForm.inputPerusahaan.$touched">
 	                        <div ng-message="required">form harus diisi.</div>
 	                      </div>
 	                    </md-input-container>
@@ -28,8 +28,8 @@
 	                  <div class="col-md-12">
 	                    <md-input-container style="width: 100%">
 	                      <label>Nama Pendaftar</label>
-	                      <input type="text" ng-model="main.longitude" ng-change="main.change()" required name="inputLong"/>
-	                      <div ng-messages="searchForm.inputLong.$error" ng-if="searchForm.inputLong.$touched">
+	                      <input type="text" ng-model="registrasi.item.namaPendaftar" required name="inputPendaftar"/>
+	                      <div ng-messages="searchForm.inputPendaftar.$error" ng-if="searchForm.inputPendaftar.$touched">
 	                        <div ng-message="required">form harus diisi.</div>
 	                      </div>
 	                    </md-input-container>
@@ -39,8 +39,8 @@
 	                  <div class="col-md-12">
 	                    <md-input-container style="width: 100%">
 	                      <label>Alamat Perusahaan</label>
-	                      <input type="text" ng-model="main.longitude" ng-change="main.change()" required name="inputLong"/>
-	                      <div ng-messages="searchForm.inputLong.$error" ng-if="searchForm.inputLong.$touched">
+	                      <input type="text" ng-model="registrasi.item.alamatPerusahaan" required name="inputAlamat"/>
+	                      <div ng-messages="searchForm.inputAlamat.$error" ng-if="searchForm.inputAlamat.$touched">
 	                        <div ng-message="required">form harus diisi.</div>
 	                      </div>
 	                    </md-input-container>
@@ -50,10 +50,21 @@
 		              <div class="col-md-12">
 		                <md-input-container style="width: 100%">
 		                  <label>No. Telepon yang dapat dihubungi</label>
-		                  <input type="number" ng-model="main.longitude" ng-change="main.change()" required name="inputLong"/>
-		                  <div ng-messages="searchForm.inputLong.$error" ng-if="searchForm.inputLong.$touched">
+		                  <input type="number" ng-model="registrasi.item.noTelp" required name="inputTelp"/>
+		                  <div ng-messages="searchForm.inputTelp.$error" ng-if="searchForm.inputTelp.$touched">
 		                    <div ng-message="required">form harus diisi.</div>
 		                    <div ng-message="number">isian form harus berupa angka.</div>
+		                  </div>
+		                </md-input-container>
+		              </div>
+		            </div>
+		            <div class="row">
+		              <div class="col-md-12">
+		                <md-input-container style="width: 100%">
+		                  <label>NPWP</label>
+		                  <input type="text" ng-model="registrasi.item.npwpd" required name="inputNpwp"/>
+		                  <div ng-messages="searchForm.inputNpwp.$error" ng-if="searchForm.inputNpwp.$touched">
+		                    <div ng-message="required">form harus diisi.</div>
 		                  </div>
 		                </md-input-container>
 		              </div>
@@ -69,8 +80,8 @@
 		              <div class="col-md-12">
 		                <md-input-container style="width: 100%">
 		                  <label>E-mail</label>
-		                  <input type="email" ng-model="main.longitude" ng-change="main.change()" required name="inputLong"/>
-		                  <div ng-messages="searchForm.inputLong.$error" ng-if="searchForm.inputLong.$touched">
+		                  <input type="email" ng-model="registrasi.item.email" required name="inputEmail"/>
+		                  <div ng-messages="searchForm.inputEmail.$error" ng-if="searchForm.inputEmail.$touched">
 		                    <div ng-message="required">form harus diisi.</div>
 		                    <div ng-message="email">harus menggunakan format email.</div>
 		                  </div>
@@ -82,9 +93,10 @@
 		        	  <div class="col-md-12">
 		                <md-input-container style="width: 100%">
 		                  <label>Password</label>
-		                  <input type="text" ng-model="main.latitude" ng-change="main.change()" required name="inputLat"/>
-		                  <div ng-messages="searchForm.inputLat.$error" ng-if="searchForm.inputLat.$touched">
+		                  <input type="password" ng-model="registrasi.item.password" required name="inputPass" minlength="6" />
+		                  <div ng-messages="searchForm.inputPass.$error" ng-if="searchForm.inputPass.$touched">
 		                    <div ng-message="required">form harus diisi.</div>
+		                    <div ng-message="minlength">form harus diisi minimal 6 karakter.</div>
 		                  </div>
 		                </md-input-container>
 		              </div>
@@ -93,7 +105,7 @@
 	          </div>
 	          <div class="row">
 	              <div class="col-md-12">
-	                <md-button class="md-raised md-primary" ng-click="main.isInRangeRadius()" style="width: 100%">Submit</md-button>
+	                <md-button class="md-raised md-primary" type="submit" style="width: 100%">Submit</md-button>
 	              </div>
 	            </div>
 	        </div>
@@ -101,9 +113,10 @@
       </div>
 
       <div class="text-center">
-        <md-toolbar md-colors="{background: '{{main.inRange ? 'light-green' : 'red'}}'}" ng-if="main.inRange != undefined">
+        <md-toolbar md-colors="{background: '{{registrasi.status ? 'light-green' : 'red'}}'}" ng-if="registrasi.status != undefined">
           <div class="md-toolbar-tools" layout-align="center center">
-            <h2 class="md-flex" style="font-weight: bold;color: white;">Data Berhasil Dibuat Silahkan Login. Klik Disini</h2>
+            <h2 class="md-flex" style="font-weight: bold;color: white;" ng-if="registrasi.status">Registrasi Berhasil. Silahkan <a href="#/login" style="color:blue">Login</a>.</h2>
+            <h2 class="md-flex" style="font-weight: bold;color: white;" ng-if="!registrasi.status">Registrasi Gagal.</h2>
           </div>
         </md-toolbar>
       </div>

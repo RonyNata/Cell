@@ -6,7 +6,7 @@
     .controller('InputController', InputController);
 
   /** @ngInject */
-  function InputController($timeout, webDevTec, toastr, $q, MainService, InputService, $log, $scope) {
+  function InputController($timeout, webDevTec, toastr, $q, MainService, InputService, $log, $scope, $state) {
     var vm = this;
 
     // list of `state` value/display objects
@@ -132,10 +132,18 @@
       InputService.Login(vm.loginData).then(
         function(response){
           // if(navigator.cookieEnabled)
-            InputService.setCookie('cred', response.tokenType + ' ' + response.accessToken, 30);
           // else sessionStorage.setItem('cred', response.tokenType + ' ' + response.accessToken);
+          var token = response.accessToken.split(" ");
+          InputService.setCookie('cred', response.tokenType + ' ' + token[1], 30);
+          InputService.setCookie('role', token[0]);
+          InputService.setCookie('user', vm.loginData.user);
+
           isLogin();
         }, function(errResponse){
+          // var response = {
+          //   accessToken: "1 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNTQ1MTkyODk5NDI1IiwiaWF0IjoxNTQ1Mzc4MDYyLCJleHAiOjE1NDU0Mzg1NDJ9.YZt9-FfVpeD7jdv7ghSsoGZkQs5JAT-eyrReQYOpU48gZIb83NJDdjYpXHcj_DRuluk5yFgr7jBuY9w5VQHTSQ",
+          //   tokenType: "Bearer"
+          // }
           InputService.showToastrFailed(errResponse.data.message);
         })
     }
@@ -154,8 +162,8 @@
       if(!navigator.cookieEnabled)
       alert("Terjadi kesalahan, Cookie pada browser anda dalam keadaan mati. Hidupkan cookie terlebih dahulu.");
       var cred = InputService.checkCookie();
-      if(cred) vm.isLogin = true;
-      else vm.isLogin = false;
+      if(InputService.getCookie('role') == "0") $state.go('managepengajuan');
+          else $state.go('pengajuan');
     }
 
     vm.getBTS = function(){

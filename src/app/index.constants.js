@@ -6,6 +6,6 @@
     .module('cell')
     .constant('malarkey', malarkey)
     .constant('moment', moment)
-    .constant('API', 'http://10.2.1.57:80/');
+    .constant('API', 'http://localhost:8989/');
 
 })();
